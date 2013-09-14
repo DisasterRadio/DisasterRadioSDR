@@ -1,0 +1,20 @@
+
+There is a locale bug in GNU Radio. It fails with a whole bunch of these errors:
+
+  locale::facet::_S_create_c_locale name not valid
+
+Fixed it by setting:
+
+  export LC_ALL="C"
+  export LANG="C"
+  export LANGUAGE="C"
+
+Not sure which were actually needed. Maybe only LC_ALL, but easy to test by unsetting some.
+
+Correct error might be an arm specific code fix in libboost. See here for inspiration:
+
+  https://svn.boost.org/trac/boost/ticket/4688
+
+  https://svn.boost.org/trac/boost/attachment/ticket/4688/boost_filesystem.patch
+
+

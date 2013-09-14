@@ -1,0 +1,19 @@
+This may be the command used to successfully compile, but need to verify to be sure:
+
+cmake -DCMAKE_CXX_FLAGS:STRING="-O2 -march=armv7-a -mtune=cortex-a8 -mfpu=neon -funsafe-math-optimizations -ftree-vectorize -flto -fopenmp -mfloat-abi=hard -mvectorize-with-neon-quad" -DCMAKE_C_FLAGS:STRING="-O2 -march=armv7-a -mtune=cortex-a8 -mfpu=neon -funsafe-math-optimizations -fno-tree-vectorize -flto -fopenmp -mfloat-abi=hard -mvectorize-with-neon-quad" ..
+
+The build-gnuradio script failed with:
+
+[  9%] Building C object gnuradio-core/src/lib/CMakeFiles/gnuradio-core.dir/filter/dotprod_fff_armv7_a.c.o
+/tmp/ccoRoIco.s: Assembler messages:
+/tmp/ccoRoIco.s:30: Error: selected FPU does not support instruction -- `vmov.f32 q8,#0.0'
+/tmp/ccoRoIco.s:31: Error: selected FPU does not support instruction -- `vmov.f32 q9,#0.0'
+/tmp/ccoRoIco.s:36: Error: selected FPU does not support instruction -- `vmla.f32 q8,q0,q2'
+/tmp/ccoRoIco.s:37: Error: selected FPU does not support instruction -- `vmla.f32 q9,q1,q3'
+/tmp/ccoRoIco.s:39: Error: selected FPU does not support instruction -- `vadd.f32 q8,q8,q9'
+/tmp/ccoRoIco.s:40: Error: selected processor does not support Thumb mode `vpadd.f32 d0,d16,d17'
+make[2]: *** [gnuradio-core/src/lib/CMakeFiles/gnuradio-core.dir/filter/dotprod_fff_armv7_a.c.o] Error 1
+make[1]: *** [gnuradio-core/src/lib/CMakeFiles/gnuradio-core.dir/all] Error 2
+make: *** [all] Error 2
+juul@arm:~/sdr/gnuradio/build$ 
+
