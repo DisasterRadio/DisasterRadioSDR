@@ -1,3 +1,4 @@
 #!/bin/sh
 echo "Recording to ~/fm.out"
+echo "To play sample use: aplay -r 48k -f S16_LE ~/fm.out"
 rtl_fm -f 94.1e6 -W -s 200000 -r 48000 ~/fm.out
